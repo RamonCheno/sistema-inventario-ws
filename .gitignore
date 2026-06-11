@@ -1,0 +1,29 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.sln.docstates
+
+# Compilados y artefactos de build
+bin/
+obj/
+Debug/
+Release/
+
+# NuGet
+packages/
+*.nupkg
+.nuget/
+project.assets.json
+project.nuget.cache
+*.dgspec.json
+
+# Entity Framework
+*.Up2Date
+
+# Sistema operativo
+Thumbs.db
+.DS_Store
+
+# Logs
+*.log
