@@ -4,7 +4,7 @@ using SistemaInventarioWS.Data;
 using SistemaInventarioWS.Models;
 using System.Linq;
 
-namespace SistemaInventarioWS.Services
+namespace SistemaInventarioWS
 {
     // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de clase "InventarioService" en el código, en svc y en el archivo de configuración a la vez.
     // NOTA: para iniciar el Cliente de prueba WCF para probar este servicio, seleccione InventarioService.svc o InventarioService.svc.cs en el Explorador de soluciones e inicie la depuración.

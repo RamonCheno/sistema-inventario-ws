@@ -18,13 +18,19 @@ namespace SistemaInventarioWS
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-
             if (HttpContext.Current.Request.HttpMethod == "OPTIONS")
             {
                 HttpContext.Current.Response.StatusCode = 200;
                 HttpContext.Current.Response.End();
+                return;
             }
 
+            var rawUrl = HttpContext.Current.Request.RawUrl.Split('?')[0].TrimEnd('/');
+            if (rawUrl == "" || rawUrl == "/")
+            {
+                HttpContext.Current.Response.Redirect("~/HelpPage/index.ashx", false);
+                HttpContext.Current.ApplicationInstance.CompleteRequest();
+            }
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)

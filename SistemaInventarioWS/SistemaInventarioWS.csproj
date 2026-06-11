@@ -31,6 +31,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>App_Data\SistemaInventarioWS.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -39,6 +40,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>App_Data\SistemaInventarioWS.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -62,11 +64,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Services\InventarioService.svc" />
+    <Content Include="HelpPage\index.ashx" />
+    <Content Include="InventarioService.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\IInventarioService.cs" />
+    <Compile Include="HelpPage\DocsHandler.cs" />
     <Compile Include="Data\AppDbContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -83,7 +87,7 @@
     <Compile Include="Models\Proveedor.cs" />
     <Compile Include="Models\Venta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\InventarioService.svc.cs">
+    <Compile Include="InventarioService.svc.cs">
       <DependentUpon>InventarioService.svc</DependentUpon>
     </Compile>
   </ItemGroup>
