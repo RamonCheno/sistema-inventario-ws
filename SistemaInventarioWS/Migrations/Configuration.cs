@@ -1,4 +1,5 @@
-﻿namespace SistemaInventarioWS.Migrations
+﻿
+namespace SistemaInventarioWS.Migrations
 {
     using System;
     using System.Data.Entity;

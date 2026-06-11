@@ -20,11 +20,11 @@
                 "dbo.Productoes",
                 c => new
                     {
-                        Id = c.String(nullable: false, maxLength: 128),
+                        Id = c.Int(nullable: false, identity: true),
                         Nombre = c.String(nullable: false),
                         Precio = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Stock = c.Int(nullable: false),
-                        StockMin = c.Int(nullable: false),
+                        StockMinimo = c.Int(nullable: false),
                         CategoriaId = c.Int(nullable: false),
                         ProveedorId = c.Int(nullable: false),
                     })
@@ -78,24 +78,23 @@
                         PrecioUnitario = c.Decimal(nullable: false, precision: 18, scale: 2),
                         VentaId = c.Int(nullable: false),
                         ProductoId = c.Int(nullable: false),
-                        Producto_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Productoes", t => t.Producto_Id)
+                .ForeignKey("dbo.Productoes", t => t.ProductoId, cascadeDelete: true)
                 .ForeignKey("dbo.Ventas", t => t.VentaId, cascadeDelete: true)
                 .Index(t => t.VentaId)
-                .Index(t => t.Producto_Id);
+                .Index(t => t.ProductoId);
             
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.DetalleVentas", "VentaId", "dbo.Ventas");
-            DropForeignKey("dbo.DetalleVentas", "Producto_Id", "dbo.Productoes");
+            DropForeignKey("dbo.DetalleVentas", "ProductoId", "dbo.Productoes");
             DropForeignKey("dbo.Ventas", "ClienteId", "dbo.Clientes");
             DropForeignKey("dbo.Productoes", "ProveedorId", "dbo.Proveedors");
             DropForeignKey("dbo.Productoes", "CategoriaId", "dbo.Categorias");
-            DropIndex("dbo.DetalleVentas", new[] { "Producto_Id" });
+            DropIndex("dbo.DetalleVentas", new[] { "ProductoId" });
             DropIndex("dbo.DetalleVentas", new[] { "VentaId" });
             DropIndex("dbo.Ventas", new[] { "ClienteId" });
             DropIndex("dbo.Productoes", new[] { "ProveedorId" });

@@ -11,7 +11,7 @@ namespace SistemaInventarioWS.Models
     {
 
         [Key]
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public string Nombre { get; set; }
@@ -19,7 +19,7 @@ namespace SistemaInventarioWS.Models
         public decimal Precio { get; set; }
 
         public int Stock { get; set; }
-        public int StockMin { get; set; }
+        public int StockMinimo { get; set; }
 
         public int CategoriaId { get; set; }
         //[ForeignKey("Categoria")]

@@ -13,7 +13,7 @@ namespace SistemaInventarioWS.Contracts
     {
 
         //Categoria
-        [OperationContract] string GetCategoria();
+        [OperationContract] string GetCategorias();
         [OperationContract] string GetCategoriaById(int id);
         [OperationContract] string CreateCategoria(string json);
         [OperationContract] string UpdateCategoria(string json);

@@ -2,12 +2,7 @@
 using SistemaInventarioWS.Contracts;
 using SistemaInventarioWS.Data;
 using SistemaInventarioWS.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
 
 namespace SistemaInventarioWS.Services
 {
@@ -17,137 +12,213 @@ namespace SistemaInventarioWS.Services
     {
 
         private readonly AppDbContext _db = new AppDbContext();
-        
-        //Categoria
-        public string CreateCategoria(string json)
-        {
-            Categoria item = JsonConvert.DeserializeObject<Categoria>(json);
-            _db.Categorias.Add(item);
-            _db.SaveChanges();
-            return JsonConvert.SerializeObject(item);
-        }
 
-        public bool DeleteCategoria(int id)
+        public string GetCategorias()
         {
-            Categoria item = _db.Categorias.Find(id);
-            if (item != null) return false;
-            _db.Categorias.Remove(item);
-            _db.SaveChanges();
-            return true;
-        }
-
-        public string GetCategoria()
-        {
-            List<Categoria> lista = _db.Categorias.ToList();
+            var lista = _db.Categorias.ToList();
             return JsonConvert.SerializeObject(lista);
         }
 
         public string GetCategoriaById(int id)
         {
-            Categoria item = _db.Categorias.Find(id);
+            var item = _db.Categorias.Find(id);
+            return JsonConvert.SerializeObject(item);
+        }
+
+        public string CreateCategoria(string json)
+        {
+            var item = JsonConvert.DeserializeObject<Categoria>(json);
+            _db.Categorias.Add(item);
+            _db.SaveChanges();
             return JsonConvert.SerializeObject(item);
         }
 
         public string UpdateCategoria(string json)
         {
-            throw new NotImplementedException();
-        }
-
-        //Clientes
-        public string CreateCliente(string json)
-        {
-            Cliente item = JsonConvert.DeserializeObject<Cliente>(json);
-            _db.Clientes.Add(item);
+            var item = JsonConvert.DeserializeObject<Categoria>(json);
+            var existing = _db.Categorias.Find(item.Id);
+            existing.Nombre = item.Nombre;
             _db.SaveChanges();
-            return JsonConvert.SerializeObject(item);
+            return JsonConvert.SerializeObject(existing);
         }
 
-        public string DeleteCliente(int id)
+        public bool DeleteCategoria(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public string GetClienteById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string GetClientes()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string UpdateCliente(string json)
-        {
-            throw new NotImplementedException();
-        }
-
-        //Productos
-        public string CreateProducto(string json)
-        {
-            Producto item = JsonConvert.DeserializeObject<Producto>(json);
-            _db.Productos.Add(item);
+            var item = _db.Categorias.Find(id);
+            if (item == null) return false;
+            _db.Categorias.Remove(item);
             _db.SaveChanges();
-            return JsonConvert.SerializeObject(item);
+            return true;
         }
 
-        public string DeleteProducto(int id)
+        // ── PROVEEDORES ─────────────────────────────────────────
+        public string GetProveedores()
         {
-            throw new NotImplementedException();
+            return JsonConvert.SerializeObject(_db.Proveedores.ToList());
         }
 
-        public string GetProductoById(int id)
+        public string GetProveedorById(int id)
         {
-            throw new NotImplementedException();
+            return JsonConvert.SerializeObject(_db.Proveedores.Find(id));
         }
 
-        public string GetProductos()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string UpdateProducto(string json)
-        {
-            throw new NotImplementedException();
-        }
-
-        //Proveedor
         public string CreateProveedor(string json)
         {
-            Proveedor item = JsonConvert.DeserializeObject<Proveedor>(json);
+            var item = JsonConvert.DeserializeObject<Proveedor>(json);
             _db.Proveedores.Add(item);
             _db.SaveChanges();
             return JsonConvert.SerializeObject(item);
         }
 
-        public string DeleteProveedor(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string GetProveedorById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string GetProveedores()
-        {
-            throw new NotImplementedException();
-        }
-
         public string UpdateProveedor(string json)
         {
-            throw new NotImplementedException();
+            var item = JsonConvert.DeserializeObject<Proveedor>(json);
+            var existing = _db.Proveedores.Find(item.Id);
+            existing.Nombre = item.Nombre;
+            existing.Telefono = item.Telefono;
+            existing.Email = item.Email;
+            _db.SaveChanges();
+            return JsonConvert.SerializeObject(existing);
         }
 
-        //Venta
+        public bool DeleteProveedor(int id)
+        {
+            var item = _db.Proveedores.Find(id);
+            if (item == null) return false;
+            _db.Proveedores.Remove(item);
+            _db.SaveChanges();
+            return true;
+        }
+
+        // ── PRODUCTOS ───────────────────────────────────────────
+        public string GetProductos()
+        {
+            var lista = _db.Productos
+                .Include("Categoria")
+                .Include("Proveedor")
+                .ToList();
+            return JsonConvert.SerializeObject(lista, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+        }
+
+        public string GetProductoById(int id)
+        {
+            var item = _db.Productos
+                .Include("Categoria")
+                .Include("Proveedor")
+                .FirstOrDefault(p => p.Id == id);
+            return JsonConvert.SerializeObject(item, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+        }
+
+        public string CreateProducto(string json)
+        {
+            var item = JsonConvert.DeserializeObject<Producto>(json);
+            _db.Productos.Add(item);
+            _db.SaveChanges();
+            return JsonConvert.SerializeObject(item);
+        }
+
+        public string UpdateProducto(string json)
+        {
+            var item = JsonConvert.DeserializeObject<Producto>(json);
+            var existing = _db.Productos.Find(item.Id);
+            existing.Nombre = item.Nombre;
+            existing.Precio = item.Precio;
+            existing.Stock = item.Stock;
+            existing.StockMinimo = item.StockMinimo;
+            existing.CategoriaId = item.CategoriaId;
+            existing.ProveedorId = item.ProveedorId;
+            _db.SaveChanges();
+            return JsonConvert.SerializeObject(existing);
+        }
+
+        public bool DeleteProducto(int id)
+        {
+            var item = _db.Productos.Find(id);
+            if (item == null) return false;
+            _db.Productos.Remove(item);
+            _db.SaveChanges();
+            return true;
+        }
+
+        // ── CLIENTES ────────────────────────────────────────────
+        public string GetClientes()
+        {
+            return JsonConvert.SerializeObject(_db.Clientes.ToList());
+        }
+
+        public string GetClienteById(int id)
+        {
+            return JsonConvert.SerializeObject(_db.Clientes.Find(id));
+        }
+
+        public string CreateCliente(string json)
+        {
+            var item = JsonConvert.DeserializeObject<Cliente>(json);
+            _db.Clientes.Add(item);
+            _db.SaveChanges();
+            return JsonConvert.SerializeObject(item);
+        }
+
+        public string UpdateCliente(string json)
+        {
+            var item = JsonConvert.DeserializeObject<Cliente>(json);
+            var existing = _db.Clientes.Find(item.Id);
+            existing.Nombre = item.Nombre;
+            existing.Email = item.Email;
+            existing.Telefono = item.Telefono;
+            _db.SaveChanges();
+            return JsonConvert.SerializeObject(existing);
+        }
+
+        public bool DeleteCliente(int id)
+        {
+            var item = _db.Clientes.Find(id);
+            if (item == null) return false;
+            _db.Clientes.Remove(item);
+            _db.SaveChanges();
+            return true;
+        }
+
+        // ── VENTAS ──────────────────────────────────────────────
+        public string GetVentas()
+        {
+            var lista = _db.Ventas
+                .Include("Cliente")
+                .Include("Detalles")
+                .Include("Detalles.Producto")
+                .ToList();
+            return JsonConvert.SerializeObject(lista, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+        }
+
+        public string GetVentaById(int id)
+        {
+            var item = _db.Ventas
+                .Include("Cliente")
+                .Include("Detalles")
+                .Include("Detalles.Producto")
+                .FirstOrDefault(v => v.Id == id);
+            return JsonConvert.SerializeObject(item, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+        }
+
         public string CreateVenta(string json)
         {
-            Venta venta = JsonConvert.DeserializeObject<Venta>(json);
+            var venta = JsonConvert.DeserializeObject<Venta>(json);
             venta.Total = 0;
-            foreach (DetalleVenta detalle in venta.Detalles)
+            foreach (var detalle in venta.Detalles)
             {
-                Producto producto = _db.Productos.Find(detalle.ProductoId);
+                var producto = _db.Productos.Find(detalle.ProductoId);
                 detalle.PrecioUnitario = producto.Precio;
                 producto.Stock -= detalle.Cantidad;
                 venta.Total += detalle.Cantidad * detalle.PrecioUnitario;
@@ -156,23 +227,17 @@ namespace SistemaInventarioWS.Services
             _db.SaveChanges();
             return JsonConvert.SerializeObject(venta, new JsonSerializerSettings
             {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             });
         }
 
-        public string DeleteVenta(int id)
+        public bool DeleteVenta(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public string GetVentaById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string GetVentas()
-        {
-            throw new NotImplementedException();
+            var item = _db.Ventas.Find(id);
+            if (item == null) return false;
+            _db.Ventas.Remove(item);
+            _db.SaveChanges();
+            return true;
         }
     }
 }

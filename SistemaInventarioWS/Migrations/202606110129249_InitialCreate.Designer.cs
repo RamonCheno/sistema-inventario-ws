@@ -13,7 +13,7 @@ namespace SistemaInventarioWS.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202606102333155_InitialCreate"; }
+            get { return "202606110129249_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source
