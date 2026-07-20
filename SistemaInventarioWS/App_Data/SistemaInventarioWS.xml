@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SistemaInventarioWS</name>
+    </assembly>
+    <members>
+        <member name="M:SistemaInventarioWS.Contracts.IInventarioService.GetCategorias">
+            <summary>Retorna todas las categorías</summary>
+        </member>
+        <member name="M:SistemaInventarioWS.Contracts.IInventarioService.GetCategoriaById(System.Int32)">
+            <summary>Retorna una categoría por Id</summary>
+        </member>
+        <member name="M:SistemaInventarioWS.Contracts.IInventarioService.CreateCategoria(System.String)">
+            <summary>Crea una nueva categoría</summary>
+        </member>
+        <member name="M:SistemaInventarioWS.Contracts.IInventarioService.UpdateCategoria(System.String)">
+            <summary>Actualiza el nombre de una categoría existente</summary>
+        </member>
+        <member name="M:SistemaInventarioWS.Contracts.IInventarioService.DeleteCategoria(System.Int32)">
+            <summary>Elimina una categoría por Id</summary>
+        </member>
+        <member name="M:SistemaInventarioWS.Contracts.IInventarioService.GetProveedores">
+            <summary>Retorna todos los proveedores</summary>
+        </member>
+        <member name="M:SistemaInventarioWS.Contracts.IInventarioService.GetProveedorById(System.Int32)">
+            <summary>Retorna un proveedor por Id</summary>
+        </member>
+        <member name="M:SistemaInventarioWS.Contracts.IInventarioService.CreateProveedor(System.String)">
+            <summary>Crea un nuevo proveedor</summary>
+        </member>
+        <member name="M:SistemaInventarioWS.Contracts.IInventarioService.UpdateProveedor(System.String)">
+            <summary>Actualiza los datos de un proveedor existente</summary>
+        </member>
+        <member name="M:SistemaInventarioWS.Contracts.IInventarioService.DeleteProveedor(System.Int32)">
+            <summary>Elimina un proveedor por Id</summary>
+        </member>
+        <member name="M:SistemaInventarioWS.Contracts.IInventarioService.GetProductos">
+            <summary>Retorna todos los productos con su categoría y proveedor</summary>
+        </member>
+        <member name="M:SistemaInventarioWS.Contracts.IInventarioService.GetProductoById(System.Int32)">
+            <summary>Retorna un producto por Id con su categoría y proveedor</summary>
+        </member>
+        <member name="M:SistemaInventarioWS.Contracts.IInventarioService.CreateProducto(System.String)">
+            <summary>Crea un nuevo producto</summary>
+        </member>
+        <member name="M:SistemaInventarioWS.Contracts.IInventarioService.UpdateProducto(System.String)">
+            <summary>Actualiza los datos de un producto existente</summary>
+        </member>
+        <member name="M:SistemaInventarioWS.Contracts.IInventarioService.DeleteProducto(System.Int32)">
+            <summary>Elimina un producto por Id</summary>
+        </member>
+        <member name="M:SistemaInventarioWS.Contracts.IInventarioService.GetClientes">
+            <summary>Retorna todos los clientes</summary>
+        </member>
+        <member name="M:SistemaInventarioWS.Contracts.IInventarioService.GetClienteById(System.Int32)">
+            <summary>Retorna un cliente por Id</summary>
+        </member>
+        <member name="M:SistemaInventarioWS.Contracts.IInventarioService.CreateCliente(System.String)">
+            <summary>Crea un nuevo cliente</summary>
+        </member>
+        <member name="M:SistemaInventarioWS.Contracts.IInventarioService.UpdateCliente(System.String)">
+            <summary>Actualiza los datos de un cliente existente</summary>
+        </member>
+        <member name="M:SistemaInventarioWS.Contracts.IInventarioService.DeleteCliente(System.Int32)">
+            <summary>Elimina un cliente por Id</summary>
+        </member>
+        <member name="M:SistemaInventarioWS.Contracts.IInventarioService.GetVentas">
+            <summary>Retorna todas las ventas con cliente y detalle de productos</summary>
+        </member>
+        <member name="M:SistemaInventarioWS.Contracts.IInventarioService.GetVentaById(System.Int32)">
+            <summary>Retorna una venta por Id con cliente y detalle</summary>
+        </member>
+        <member name="M:SistemaInventarioWS.Contracts.IInventarioService.CreateVenta(System.String)">
+            <summary>Crea una venta — calcula Total y PrecioUnitario, descuenta stock</summary>
+        </member>
+        <member name="M:SistemaInventarioWS.Contracts.IInventarioService.DeleteVenta(System.Int32)">
+            <summary>Elimina una venta por Id</summary>
+        </member>
+    </members>
+</doc>
