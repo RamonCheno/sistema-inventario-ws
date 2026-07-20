@@ -2,7 +2,20 @@
 
 Backend del Sistema de Inventario y Ventas. Servicio SOAP construido con WCF (.svc) sobre .NET Framework 4.8 y Entity Framework 6.
 
-## Stack
+## Estructura del repositorio
+
+Este repo es un monorepo de carpetas con dos implementaciones del mismo backend:
+
+```
+sistema-inventario-ws/
+├── wcf-clasico/       ← WCF SOAP clásico sobre .NET Framework 4.8 (documentado abajo)
+└── corewcf-net10/     ← Migración a CoreWCF sobre .NET 10 (en progreso, solo por aprendizaje)
+```
+
+`wcf-clasico/` es la implementación de referencia y la que consume el frontend en producción.
+`corewcf-net10/` es un ejercicio de aprendizaje para ver cómo se hace WCF SOAP en .NET moderno — no reemplaza a `wcf-clasico/`.
+
+## Stack (wcf-clasico)
 
 - C# / .NET Framework 4.8
 - WCF SOAP (.svc)
@@ -28,7 +41,7 @@ Backend del Sistema de Inventario y Ventas. Servicio SOAP construido con WCF (.s
 
 ## Configuración
 
-1. Abrir `SistemaInventarioWS.sln` en Visual Studio 2022
+1. Abrir `wcf-clasico/SistemaInventarioWS.sln` en Visual Studio 2022
 2. Restaurar paquetes NuGet (clic derecho en la solución → Restore NuGet Packages)
 3. En el Package Manager Console, aplicar la migración:
    ```
@@ -41,10 +54,10 @@ El servicio queda disponible en:
 http://localhost:{puerto}/Services/InventarioService.svc
 ```
 
-## Estructura
+## Estructura (wcf-clasico)
 
 ```
-SistemaInventarioWS/
+wcf-clasico/SistemaInventarioWS/
 ├── Contracts/
 │   └── IInventarioService.cs    ← contratos SOAP (OperationContract)
 ├── Data/
