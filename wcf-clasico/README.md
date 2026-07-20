@@ -59,8 +59,11 @@ SistemaInventarioWS/
 │   ├── Cliente.cs
 │   ├── Venta.cs
 │   └── DetalleVenta.cs
-├── Services/
-│   └── InventarioService.svc.cs ← implementación del servicio
+├── HelpPage/                    ← página de ayuda (DocsHandler + index.ashx)
+├── App_Data/
+│   └── SistemaInventarioWS.xml  ← XML de documentación (DocumentationFile)
+├── InventarioService.svc.cs     ← implementación del servicio
+├── InventarioService.svc        ← endpoint del servicio WCF
 ├── Global.asax.cs               ← manejo de CORS (preflight OPTIONS)
 └── Web.config                   ← binding, CORS headers, connection string
 ```
