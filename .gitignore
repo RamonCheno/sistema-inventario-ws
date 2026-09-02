@@ -21,6 +21,14 @@ project.nuget.cache
 # Entity Framework
 *.Up2Date
 
+# Resultados de pruebas
+[Tt]est[Rr]esult*/
+*.trx
+
+# Configuracion local / secretos (nunca subir)
+*.pfx
+appsettings.*.local.json
+
 # Sistema operativo
 Thumbs.db
 .DS_Store
